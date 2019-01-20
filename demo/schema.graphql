@@ -1,0 +1,44 @@
+type Mutation {
+  """
+  An example field added by the generator
+  """
+  testField: String!
+}
+
+type Post {
+  author: User
+  content: String
+  title: String
+}
+
+type Query {
+  """
+  returns all posts
+  """
+  posts: [Post!]!
+
+  """
+  returns all users
+  """
+  users: [User!]!
+}
+
+"""
+Member of awesome service
+"""
+type User {
+  """
+  a user's age
+  """
+  age: Int
+
+  """
+  a user's name
+  """
+  name: String
+
+  """
+  a user's posts
+  """
+  posts: [Post!]
+}
