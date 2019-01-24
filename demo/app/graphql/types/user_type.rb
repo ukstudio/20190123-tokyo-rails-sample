@@ -2,9 +2,9 @@ module Types
   class UserType < Types::BaseObject
     description "Member of awesome service"
 
-    field :name, String, "a user's name", null: true
-    field :age, Integer, "a user's age", null: true
-    field :posts, [Types::PostType], "a user's posts", null: true
+    field :name, String, "a user's name", null: false
+    field :age, Integer, "a user's age", null: false
+    field :posts, [Types::PostType], "a user's posts", null: false
 
     def name
       object.name
@@ -15,7 +15,7 @@ module Types
     end
 
     def posts
-      object.posts
+      AssociationLoader.for(User, :posts).load(object)
     end
   end
 end

@@ -5,6 +5,31 @@ type Mutation {
   testField: String!
 }
 
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+}
+
 type Post {
   author: User
   content: String
@@ -13,14 +38,29 @@ type Post {
 
 type Query {
   """
-  returns all posts
-  """
-  posts: [Post!]!
-
-  """
   returns all users
   """
-  users: [User!]!
+  users(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): UserConnection!
 }
 
 """
@@ -30,15 +70,50 @@ type User {
   """
   a user's age
   """
-  age: Int
+  age: Int!
 
   """
   a user's name
   """
-  name: String
+  name: String!
 
   """
   a user's posts
   """
-  posts: [Post!]
+  posts: [Post!]!
+}
+
+"""
+The connection type for User.
+"""
+type UserConnection {
+  """
+  A list of edges.
+  """
+  edges: [UserEdge]
+
+  """
+  A list of nodes.
+  """
+  nodes: [User]
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+"""
+type UserEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: User
 }

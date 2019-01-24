@@ -36,5 +36,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'graphql'
 gem 'graphql-docs'
+gem 'graphql-batch'
 
 gem 'graphiql-rails', group: :development
